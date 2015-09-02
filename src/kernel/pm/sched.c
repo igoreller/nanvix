@@ -94,9 +94,9 @@ PUBLIC void yield(void)
 		 * Process with higher
 		 * waiting time found.
 		 */
-		if (p->counter > next->counter)
+		if (p->priority > next->priority)
 		{
-			next->counter++;
+			next->priority++;
 			next = p;
 		}
 			
@@ -105,11 +105,11 @@ PUBLIC void yield(void)
 		 * time of process.
 		 */
 		else
-			p->counter++;
+			p->priority++;
 	}
 	
 	/* Switch to next process. */
 	next->state = PROC_RUNNING;
-	next->counter = PROC_QUANTUM;
+	next->priority = PROC_QUANTUM;
 	switch_to(next);
 }
